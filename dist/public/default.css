@@ -1,0 +1,39 @@
+#logo {
+  font-size: 10vmin;
+  font-family: fantasy;
+  color: darkgray;
+}
+
+#login {
+  border-style: solid;
+  border-radius: 3vmin;
+  border-width: 2px;
+  border-color: darkgray;
+  background-color: rgba(255,255,255,.9);
+}
+
+#login-form {
+  font-size: 3vmin;
+  text-align: center;
+  color: rgb(23,79,150);
+}
+
+#login-form > input {
+  width: 100%;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+}
+
+#login-form > button {
+  font-size: 2vmin;
+  margin-bottom: 1vmin;
+  color: white;
+  background-color: rgb(23,79,150);
+}
+
+#login-links {
+  text-align: center;
+  font-size: 2vmin;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+}

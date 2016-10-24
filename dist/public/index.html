@@ -9,10 +9,27 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div id="navbar" class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+      <div id="login-container" class="row">
+        <div id="logo">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            Reci-me
+          </div>
+        </div>
+        <div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="login">
+            <form id="login-form">
+              Already have an account:
+              <input type="text" placeholder=" username" />
+              <input type="text" placeholder=" password" />
+              <button type="submit">Sign In</button>
+            </form>
+            <div id="login-links">
+              <a>sign-in</a> | <a>register</a>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+        </div>
       </div>
     </div>
     <script src="bundle.js"></script>
