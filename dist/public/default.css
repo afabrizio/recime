@@ -1,0 +1,36 @@
+#logo {
+  font-size: 10vmin;
+  font-family: fantasy;
+  color: darkgray;
+}
+
+#login {
+  border-style: solid;
+  border-radius: 3vmin;
+  border-width: 2px;
+  border-color: darkgray;
+  background-color: rgba(255,255,255,.9);
+  padding: 2vmin;
+}
+
+#login-form {
+  font-size: 2.5vmin;
+  color: rgb(23,79,150);
+}
+
+#login-form > button {
+  position: relative;
+  font-size: 2vmin;
+  margin-bottom: 1vmin;
+  color: white;
+  background-color: rgb(23,79,150);
+  width: 50%;
+  left: 25%;
+}
+
+#login-links {
+  text-align: center;
+  font-size: 2vmin;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+}
