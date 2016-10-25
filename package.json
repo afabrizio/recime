@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "start": "node expressApp.js"
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "url": "https://github.com/afabrizio/recime/issues"
   },
   "homepage": "https://github.com/afabrizio/recime#readme",
+  "engines": {"node" : ">=6.8.0"},
   "devDependencies": {
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.5",
