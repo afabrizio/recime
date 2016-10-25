@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const express  = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./src/routes.js');
+const routes = require('./routes.js');
 
 MongoClient.connect('mongodb://localhost:27017/recime', (err, db) => {
   if(err) {
@@ -10,7 +10,6 @@ MongoClient.connect('mongodb://localhost:27017/recime', (err, db) => {
   }
   console.log('express server request identified')
   express()
-    .use(express.static('dist/public'))
     .use(bodyParser.json())
     .use(routes(db))
     .listen(3300, () => {
