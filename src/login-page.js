@@ -14,16 +14,16 @@ const loginPage = ({dispatch}) => {
         <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="login">
           <form id="login-form">
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
+            <div className="form-group has-feedback">
+              <label className="control-label" htmlFor="username">Username</label>
               <input
                 type="text"
                 className="form-control"
                 id="username"
                 placeholder="username" />
             </div>
-            <div className="form-group">
-              <label htmlFor="username">Password</label>
+            <div className="form-group has-feedback">
+              <label className="control-label" htmlFor="username">Password</label>
               <input
                 type="password"
                 className="form-control"

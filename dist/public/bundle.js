@@ -23126,10 +23126,10 @@
 	          { id: 'login-form' },
 	          React.createElement(
 	            'div',
-	            { className: 'form-group' },
+	            { className: 'form-group has-feedback' },
 	            React.createElement(
 	              'label',
-	              { htmlFor: 'username' },
+	              { className: 'control-label', htmlFor: 'username' },
 	              'Username'
 	            ),
 	            React.createElement('input', {
@@ -23140,10 +23140,10 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'form-group' },
+	            { className: 'form-group has-feedback' },
 	            React.createElement(
 	              'label',
-	              { htmlFor: 'username' },
+	              { className: 'control-label', htmlFor: 'username' },
 	              'Password'
 	            ),
 	            React.createElement('input', {
@@ -23196,22 +23196,29 @@
 	'use strict';
 	
 	module.exports = function (event, dispatch) {
-	  var username = document.getElementById('username').value;
-	  var password = document.getElementById('password').value;
+	  var username = document.getElementById('username');
+	  var password = document.getElementById('password');
 	  var error = false;
 	
-	  if (username === '') {
+	  if (username.value === '') {
+	    username.parentNode.classList.add('has-error');
 	    console.error("Invalid Username");
-	    password = '';
+	    password.value = '';
 	    error = true;
+	  } else {
+	    username.parentNode.classList.add('has-success');
+	    username.parentNode.classList.remove('has-error');
 	  }
-	  if (password === '') {
+	  if (password.value === '') {
+	    password.parentNode.classList.add('has-error');
 	    console.error('Invalid Password');
-	    username = '';
 	    error = true;
+	  } else {
+	    password.parentNode.classList.add('has-success');
+	    password.parentNode.classList.remove('has-error');
 	  }
 	  if (!error) {
-	    console.log(username + ': ' + password);
+	    console.log(username.value + ': ' + password.value);
 	  }
 	};
 
