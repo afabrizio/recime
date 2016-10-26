@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "start": "npm run build; node ./express/expressApp.js"
+    "start": "npm install babel-core babel-loader babel-preset-es2015 babel-preset-react webpack webpack-dev-server body-parser express mongodb react react-dom react-redux redux; npm run build; node ./express/expressApp.js"
   },
   "repository": {
     "type": "git",
