@@ -49,9 +49,8 @@
 	var ReactDOM = __webpack_require__(1);
 	var React = __webpack_require__(166);
 	
-	var _require = __webpack_require__(172);
-	
-	var Provider = _require.Provider;
+	var _require = __webpack_require__(172),
+	    Provider = _require.Provider;
 	
 	var store = __webpack_require__(196);
 	var LoginPage = __webpack_require__(199);
@@ -23033,9 +23032,8 @@
 
 	'use strict';
 	
-	var _require = __webpack_require__(179);
-	
-	var createStore = _require.createStore;
+	var _require = __webpack_require__(179),
+	    createStore = _require.createStore;
 	
 	var reducer = __webpack_require__(197);
 	
@@ -23049,9 +23047,8 @@
 
 	'use strict';
 	
-	var _require = __webpack_require__(179);
-	
-	var combineReducers = _require.combineReducers;
+	var _require = __webpack_require__(179),
+	    combineReducers = _require.combineReducers;
 	
 	var login = __webpack_require__(198);
 	
@@ -23093,9 +23090,8 @@
 	
 	var React = __webpack_require__(166);
 	
-	var _require = __webpack_require__(172);
-	
-	var connect = _require.connect;
+	var _require = __webpack_require__(172),
+	    connect = _require.connect;
 	
 	var signInRequest = __webpack_require__(200);
 	
