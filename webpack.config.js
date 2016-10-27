@@ -1,25 +1,14 @@
 module.exports = {
-  devtool: 'source-map',
-  entry: "./src/index.js",
+  entry: './index.js',
+
   output: {
-    path: "./dist/public/",
-    filename: "bundle.js"
+    filename: 'bundle.js',
+    publicPath: ''
   },
-  devServer: {
-    port: 3000,
-    contentBase: "./dist/public",
-    inline: true
-  },
+
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loader: "babel-loader",
-        exclude: /(node_modules|bower_components)/,
-        query: {
-          presets: ["es2015", "react"]
-        }
-      }
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react' }
     ]
   }
 }

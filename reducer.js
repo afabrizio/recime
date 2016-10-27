@@ -1,6 +1,6 @@
 const initialState = {};
 
-const login = (state=initialState, action) => {
+export default function(state=initialState, action) {
   switch (action.type) {
     case 'LOAD_LOGIN_PAGE':
       state = Object.assign({}, state, {currentView: 'login'});
@@ -10,5 +10,3 @@ const login = (state=initialState, action) => {
   }
   return state;
 }
-
-module.exports = login;

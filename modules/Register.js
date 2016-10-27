@@ -1,15 +1,10 @@
-const React = require('react');
-const {connect} = require('react-redux');
-const signInRequest = require('./actions/sign-in-request.js');
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
-const loginPage = ({dispatch}) => {
-  return (
-    <div>
-      <div id="logo">
-        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          Reci_me
-        </div>
-      </div>
+const registerPage = React.createClass({
+  render() {
+    return (
       <div>
         <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="login">
@@ -32,19 +27,24 @@ const loginPage = ({dispatch}) => {
             </div>
               <button
                 type="button"
-                onClick={() => {signInRequest(event, dispatch)} }>
-                  Sign In
+                onClick={() => {} }>
+                  Register
               </button>
           </form>
-          <div id="login-links">
-            <a>sign-in</a> | <a>register</a>
+          <div id="register-links">
+            <Link to='/login' activeStyle={{ color: 'violet' }}>
+              login
+            </Link> |
+            <Link to='/register' activeStyle={{ color: 'violet' }}>
+              register
+            </Link>
           </div>
         </div>
         <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+});
 
 const mapStateToProps = (state) => {
   return (
@@ -54,4 +54,4 @@ const mapStateToProps = (state) => {
   )
 }
 
-module.exports = connect(mapStateToProps)(loginPage);
+export default connect(mapStateToProps)(registerPage);
