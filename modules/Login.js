@@ -28,7 +28,7 @@ const loginPage = React.createClass({
               <button
                 type="button"
                 onClick={() => {} }>
-                  Sign In
+                  Login
               </button>
           </form>
           <div id="login-links">
