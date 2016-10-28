@@ -1,6 +1,5 @@
 #logo {
   font-size: 10vmin;
-  font-family: fantasy;
   color: darkgray;
 }
 
@@ -29,6 +28,13 @@
 }
 
 #login-links {
+  text-align: center;
+  font-size: 2vmin;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+}
+
+#register-links {
   text-align: center;
   font-size: 2vmin;
   margin-top: 1vmin;

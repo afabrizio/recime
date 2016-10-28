@@ -1,39 +1,39 @@
 {
   "name": "recime",
   "version": "1.0.0",
-  "description": "A way to create and view recipes.",
+  "description": "A way to create and view recipes",
   "main": "index.js",
+  "devtool": "source-map",
   "scripts": {
-    "build": "webpack",
-    "serve": "webpack-dev-server",
-    "start": "npm install; npm run build; node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/afabrizio/recime.git"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "webpack-dev-server --inline --content-base public --history-api-fallback",
+    "start:prod": "webpack && node server.js",
+    "build": "webpack"
   },
   "author": "A. Fabrizio",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/afabrizio/recime/issues"
-  },
-  "homepage": "https://github.com/afabrizio/recime#readme",
   "engines": {"node" : ">=6.8.0"},
-  "devDependencies": {
-    "babel-core": "^6.16.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
-  },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
     "express": "^4.14.0",
+    "if-env": "^1.0.0",
     "mongodb": "^2.2.11",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-redux": "^4.4.5",
-    "redux": "^3.6.0"
+    "react-router": "^2.0.0",
+    "redux": "^3.6.0",
+    "request": "^2.76.0",
+    "router": "^1.1.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "http-server": "^0.8.5",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
   }
 }
