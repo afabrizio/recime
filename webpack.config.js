@@ -1,25 +1,26 @@
+const webpack = require('webpack');
+
 module.exports = {
-  devtool: 'source-map',
-  entry: "./src/index.js",
+  entry: './index.js',
   output: {
-    path: "./dist/public/",
-    filename: "bundle.js"
+    path: 'public',
+    filename: 'bundle.js',
+    publicPath: '/'
   },
-  devServer: {
-    port: 3000,
-    contentBase: "./dist/public",
-    inline: true
-  },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        exclude: /(node_modules|bower_components)/,
-        query: {
-          presets: ["es2015", "react"]
-        }
+        loader: 'babel-loader?presets[]=es2015&presets[]=react',
+        exclude: /node_modules/
       }
     ]
-  }
+  },
+
+  plugins: process.env.NODE_ENV === 'production' ? [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ] : []
 }
