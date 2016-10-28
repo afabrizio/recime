@@ -34,7 +34,8 @@ const loginPage = React.createClass({
           <div id="login-links">
             <Link to='/login' activeStyle={{ color: 'violet' }}>
               login
-            </Link> |
+            </Link>
+            <span> | </span> 
             <Link to='/register' activeStyle={{ color: 'violet' }}>
               register
             </Link>

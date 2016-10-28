@@ -42,7 +42,8 @@ const registerPage = React.createClass({
           <div id="register-links">
             <Link to='/login' activeStyle={{ color: 'violet' }}>
               login
-            </Link> |
+            </Link>
+            <span> | </span>
             <Link to='/register' activeStyle={{ color: 'violet' }}>
               register
             </Link>
