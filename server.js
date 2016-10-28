@@ -4,6 +4,7 @@ const compression = require('compression');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const loginRequest = require('./requestHandlers/loginRequest.js');
+const registerRequest = require('./requestHandlers/registerRequest.js');
 
 const DEFAULT_MONGO_URI = 'mongodb://localhost:27017/recime';
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -37,6 +38,8 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   });
 
   app.post( '/users', function(req, res) {loginRequest(db, req, res)} );
+
+  app.post('/register', function(req, res) {registerRequest(db, req, res)} );
 
   app.listen(PORT, () => {
     NODE_ENV !== 'production' &&

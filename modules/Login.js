@@ -18,7 +18,7 @@ const loginPage = React.createClass({
                 placeholder="username" />
             </div>
             <div className="form-group has-feedback">
-              <label className="control-label" htmlFor="username">Password</label>
+              <label className="control-label" htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -27,7 +27,7 @@ const loginPage = React.createClass({
             </div>
               <button
                 type="button"
-                onClick={() => {handleSubmit()} }>
+                onClick={() => {handleLogin()} }>
                   Login
               </button>
           </form>
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(loginPage);
 
-function handleSubmit() {
+function handleLogin() {
   const theUsername = document.getElementById('username').value;
   const thePassword = document.getElementById('password').value;
   let URI = 'http://localhost:8080/users';
