@@ -9,6 +9,7 @@ const DEFAULT_MONGO_URI = 'mongodb://localhost:27017/recime';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const MONGODB_URI = process.env.MONGODB_URI || DEFAULT_MONGO_URI;
 var PORT = process.env.PORT || 8080;
+console.log(PORT)
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
   if(err) {
