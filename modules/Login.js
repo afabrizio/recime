@@ -27,7 +27,7 @@ const loginPage = React.createClass({
             </div>
               <button
                 type="button"
-                onClick={() => {} }>
+                onClick={() => {handleSubmit()} }>
                   Login
               </button>
           </form>
@@ -55,3 +55,21 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(loginPage);
+
+function handleSubmit() {
+  const theUsername = document.getElementById('username').value;
+  const thePassword = document.getElementById('password').value;
+  let URI = 'http://localhost:8080/users';
+  let requestProps =
+    {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify( {username: `${theUsername}`, password: `${thePassword}`} )
+    }
+  let getUsers = new Request(URI, requestProps);
+  fetch(getUsers)
+    .then( response => response.json() )
+    .then( users => {
+      console.log(users)
+    })
+}
