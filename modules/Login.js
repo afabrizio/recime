@@ -5,9 +5,11 @@ import { Link } from 'react-router';
 const loginPage = React.createClass({
   render() {
     return (
-      <div>
-        <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="login">
+      <div id="login-container" className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="login-logo">
+          Reci-me
+        </div>
+        <div id="login">
           <form id="login-form">
             <div className="form-group has-feedback">
               <label className="control-label" htmlFor="username">Username</label>
@@ -32,16 +34,15 @@ const loginPage = React.createClass({
               </button>
           </form>
           <div id="login-links">
-            <Link to='/login' activeStyle={{ color: 'violet' }}>
+            <Link to='/login' activeStyle={{ color: 'rgb(36,36,36)' }}>
               login
             </Link>
-            <span> | </span> 
-            <Link to='/register' activeStyle={{ color: 'violet' }}>
+            <span> | </span>
+            <Link to='/register' activeStyle={{ color: 'rgb(36,36,36)' }}>
               register
             </Link>
           </div>
         </div>
-        <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
       </div>
     )
   }
@@ -60,7 +61,8 @@ export default connect(mapStateToProps)(loginPage);
 function handleLogin() {
   const theUsername = document.getElementById('username').value;
   const thePassword = document.getElementById('password').value;
-  let URI = 'http://localhost:8080/users';
+  var PORT = process.env.PORT || 8080;
+  let URI = `http://localhost:${PORT}/users`;
   let requestProps =
     {
       method: 'POST',
