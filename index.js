@@ -5,9 +5,10 @@ import { Provider } from 'react-redux';
 import store from './store.js';
 
 import App from './modules/App';
-import Login from './modules/Login.js';
-import Register from './modules/Register.js';
-import Home from './modules/Home.js';
+import Login from './modules/login.js';
+import Register from './modules/register.js';
+import Home from './modules/home.js';
+import Dashboard from './modules/dashboard.js';
 
 ReactDOM.render(
   (
@@ -17,6 +18,7 @@ ReactDOM.render(
           <IndexRoute component={Home}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
+          <Route path='/:user/dashboard' component={Dashboard}/>
         </Route>
       </Router>
     </Provider>

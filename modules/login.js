@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
+
 
 const loginPage = React.createClass({
   render() {
@@ -72,7 +74,25 @@ function handleLogin() {
   let getUsers = new Request(URI, requestProps);
   fetch(getUsers)
     .then( response => response.json() )
-    .then( users => {
-      console.log(users)
+    .then( user => {
+      const response = JSON.parse(JSON.stringify(user));
+      if(typeof response === 'object') {
+        browserHistory.push(`/${response.username}/dashboard`);
+        //dispatch to update store view state
+        let URI = `http://localhost:${PORT}/${response.username}/dashboard`;
+        let requestProps =
+          {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+          }
+        let toDashboard = new Request(URI, requestProps);
+        fetch(toDashboard)
+          .then( response => response.json() )
+          .then( user => {
+            //function to populate the dashboard skeleton;
+            console.log('at dashboard for: ')
+            console.log(user)
+          })
+      }
     })
 }
