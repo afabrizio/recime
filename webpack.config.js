@@ -22,5 +22,10 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin()
-  ] : []
+  ] : [],
+  devServer: {
+    port: 3000,
+    contentBase: './public',
+    inline: true
+  }
 }

@@ -14,13 +14,17 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <div>Please Login or Register below.</div>
-        <button onClick={(e) => {this.handleNavigation(e)} } >
-          Login
-        </button>
-        <button onClick={(e) => {this.handleNavigation(e)} }>
-          Register
-        </button>
+        <div id='home-logo'>
+          Reci-me
+        </div>
+        <div id="home-buttons">
+          <button onClick={(e) => {this.handleNavigation(e)} } >
+            Login
+          </button>
+          <button onClick={(e) => {this.handleNavigation(e)} }>
+            Register
+          </button>
+        </div>
       </div>
     )
   }
