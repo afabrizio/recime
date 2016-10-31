@@ -1,20 +1,33 @@
 body {
+  position: relative;
+}
+
+#background-image {
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
   background-image: url('login.jpg');
   background-size: cover;
 }
 
 #overlay {
-  display: block;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,.5);
+  z-index: 2;
+  background-color: rgba(0,0,0,.85);
 }
 
-.container-fluid {
-  z-index: 2;
+#app-container {
+  position: relative;
+  z-index: 3;
+  width: 100vw;
+  height: 100vh;
 }
 
 #home-logo {
@@ -22,7 +35,7 @@ body {
   margin-left: 22vw;
   margin-top: 2.5vh;
   margin-bottom: 15%;
-  color: white;
+  color: lightgray;
   font-size: 8vw;
 }
 
@@ -32,14 +45,13 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  transform: translateX(-2.5vw);
 }
 
 #home-buttons > button {
   font-size: 2vw;
   letter-spacing: .5vmin;
   color: lightgray;
-  background-color: darkgray;
+  background-color: rgb(36,36,36);
   padding-top: 1vmin;
   padding-bottom: 1vmin;
   padding-left: 2vmin;
@@ -51,7 +63,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 20vw;
-  transform: translateX(-3vw);
   border-style: solid;
   border-radius: 3vmin;
   border-width: 2px;
@@ -65,7 +76,7 @@ body {
   margin-left: 20vw;
   margin-top: 2.5%;
   margin-bottom: 7.5%;
-  color: white;
+  color: lightgray;
   font-size: 10vmin;
 }
 
@@ -96,7 +107,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 20vw;
-  transform: translateX(-3vw);
   border-style: solid;
   border-radius: 3vmin;
   border-width: 2px;
@@ -110,7 +120,7 @@ body {
   margin-left: 20vw;
   margin-top: 2.5%;
   margin-bottom: 5%;
-  color: white;
+  color: lightgray;
   font-size: 10vmin;
 }
 
@@ -151,5 +161,128 @@ body {
 #confirm-password{
   font-size: 2vmin;
   height: 3vmin;
+  padding: 1vmin;
+}
+
+#dashboard-container {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(36,36,36,1);
+}
+
+#dashboard-container div {
+  min-height: 5vh;
+  color: white;
+}
+
+.dashboard-border {
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}
+
+#dashboard-sidebar {
+  position: relative;
+  display: inline-block;
+  width: 20vw;
+  height: 100vh;
+  vertical-align: top;
+}
+
+.sidebar-item {
+  font-size: 2vmin;
+  padding: 1vmin;
+}
+
+#dashboard-logo {
+  height: 10vh;
+  font-size: 4vmin;
+  text-align: center;
+  padding: 1vmin;
+}
+
+.sidebar-item {
+  height: 5vh;
+}
+
+#dashboard-main {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 100vh;
+  width: 80vw;
+}
+
+#dashboard-image {
+  position: relative;
+  display: block;
+  height: 30vh;
+  background-image: url('images/dashboard.png');
+  background-size: cover;
+}
+
+#dashboard-greeting {
+  display: block;
+  text-align: right;
+  padding-top: 2vmin;
+  padding-right: 4vmin;
+  font-size: 3vmin;
+  color: white;
+}
+
+#dashboard-modules-container {
+  position: relative;
+  z-index: 3;
+  display: block;
+  height: 70vh;
+  background-image: url('images/modules-background.png');
+  background-size: cover;
+}
+
+#dashboard-modules-overlay {
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  display: block;
+  height: 70vh;
+  background-color: rgba(0,0,0,.9);
+}
+
+.module-row {
+  position: relative;
+  display: block;
+}
+
+.module {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 20vmin;
+  width: 20vmin;
+  border-radius: 100%;
+  background-color: rgba(86,165,135,.3);
+  margin: 3vmin;
+}
+
+.module > .fa {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  font-size: 6vmin;
+  padding-top: 4vmin;
+}
+
+.module-name {
+  display: block;
+  position: relative;
+  max-width: 90%;
+  margin: auto;
+  color: white;
+  font-size: 2vmin;
+  text-align: center;
   padding: 1vmin;
 }

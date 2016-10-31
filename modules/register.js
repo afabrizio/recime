@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 const registerPage = React.createClass({
   render() {
@@ -77,17 +78,22 @@ function handleRegister() {
   }
 
   var PORT = process.env.PORT || 8080;
-  let URI = `http://localhost:${PORT}/users`;
+  let URI = `http://localhost:${PORT}/register`;
   let requestProps =
     {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify( {username: `${theUsername}`, password: `${thePassword}`} )
     }
-  let addUser = new Request(URI, requestProps);
-  fetch(addUser)
+  let validateNewUser = new Request(URI, requestProps);
+  fetch(validateNewUser)
     .then( response => response.json() )
-    .then( user => {
-      console.log('Added new user ' + user.username + '!');
+    .then( response => {
+      if(typeof response === 'string') {
+        console.log(response);
+      } else if(typeof response === 'object') {
+        console.log('Added new user ' + response.username + '!');
+      }
+      browserHistory.push('/login');
     })
 }
