@@ -191,11 +191,16 @@ body {
   vertical-align: top;
 }
 
+.sidebar-item {
+  font-size: 2vmin;
+  padding: 1vmin;
+}
+
 #dashboard-logo {
   height: 10vh;
-  font-size: 5vmin;
+  font-size: 4vmin;
   text-align: center;
-  padding: 3vmin;
+  padding: 1vmin;
 }
 
 .sidebar-item {
@@ -248,22 +253,36 @@ body {
 .module-row {
   position: relative;
   display: block;
-  height: 30vh;
-  padding-top: 5vh;
-}
-
-.module-spacer {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  height: 25vh;
-  width: 5vw;
 }
 
 .module {
   position: relative;
   display: inline-block;
-  height: 25vh;
-  width: 20vw;
-  background-color: rgba(86,165,135,.2);
+  vertical-align: top;
+  height: 20vmin;
+  width: 20vmin;
+  border-radius: 100%;
+  background-color: rgba(86,165,135,.3);
+  margin: 3vmin;
+}
+
+.module > .fa {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  font-size: 6vmin;
+  padding-top: 4vmin;
+}
+
+.module-name {
+  display: block;
+  position: relative;
+  max-width: 90%;
+  margin: auto;
+  color: white;
+  font-size: 2vmin;
+  text-align: center;
+  padding: 1vmin;
 }

@@ -13,8 +13,8 @@ export default React.createClass({
           <div id="dashboard-logo" className="dashboard-border">
             Reci-me
           </div>
-          <div className="sidebar-item" className="dashboard-border">Account</div>
-          <div className="sidebar-item" className="dashboard-border">Dashboard</div>
+          <div className="sidebar-item dashboard-border">Account</div>
+          <div className="sidebar-item dashboard-border">Dashboard</div>
         </div>
         <div id="dashboard-main" className="dashboard-border">
           <div id="dashboard-image" className="dashboard-border">
@@ -25,19 +25,19 @@ export default React.createClass({
           <div id="dashboard-modules-container" className="dashboard-border">
           <div id="dashboard-modules-overlay">
             <div className="module-row">
-              <div className="module-spacer"></div>
+              <div
+              id="dashboard-create"
+              className="module dashboard-border"
+              onClick={() => }>
+                <div className="fa fa-pencil-square-o"></div>
+                <div className="module-name">
+                  Create Recipe
+                </div>
+              </div>
               <div className="module dashboard-border"></div>
-              <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
-              <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
-            </div>
-            <div className="module-row">
-              <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
-              <div className="module-spacer"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
             </div>
           </div>
