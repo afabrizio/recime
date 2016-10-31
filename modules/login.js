@@ -64,7 +64,7 @@ function handleLogin() {
   const theUsername = document.getElementById('username').value;
   const thePassword = document.getElementById('password').value;
   var PORT = process.env.PORT || 8080;
-  let URI = `http://localhost:${PORT}/users`;
+  let URI = 'users';
   let requestProps =
     {
       method: 'POST',
