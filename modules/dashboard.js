@@ -1,7 +1,9 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import store from './../store.js';
 
-export default React.createClass({
+const dashboard =  React.createClass({
   contextTypes: {
     router: React.PropTypes.object
   },
@@ -28,7 +30,7 @@ export default React.createClass({
               <div
               id="dashboard-create"
               className="module dashboard-border"
-              onClick={() => }>
+              onClick={ () => {this.toCreateModule()} }>
                 <div className="fa fa-pencil-square-o"></div>
                 <div className="module-name">
                   Create Recipe
@@ -45,5 +47,21 @@ export default React.createClass({
         </div>
       </div>
     )
+  },
+
+  toCreateModule: function() {
+    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create-recipe'});
+    browserHistory.push(`/${store.getState().user}/create`);
+    console.log(store.getState());
   }
 })
+
+const mapStateToProps = (state) => {
+  return (
+    {
+      user: state.user
+    }
+  )
+}
+
+export default connect(mapStateToProps)(dashboard);

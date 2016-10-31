@@ -9,6 +9,8 @@ import Login from './modules/login.js';
 import Register from './modules/register.js';
 import Home from './modules/home.js';
 import Dashboard from './modules/dashboard.js';
+import Create from './modules/create.js';
+import Overview from './modules/overview.js';
 
 ReactDOM.render(
   (
@@ -19,6 +21,9 @@ ReactDOM.render(
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
           <Route path='/:user/dashboard' component={Dashboard}/>
+          <Route path='/:user/create' component={Create}>
+            <Route path='/:user/create/overview' component={Overview}/>
+          </Route>
         </Route>
       </Router>
     </Provider>

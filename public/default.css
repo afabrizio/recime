@@ -286,3 +286,28 @@ body {
   text-align: center;
   padding: 1vmin;
 }
+
+
+#create-container div {
+  min-height: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  color: white;
+}
+
+#create-sidebar {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  width: 20vw;
+  height: 100vh;
+}
+
+#create-main {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  width: 80vw;
+  height: 100vh;
+}
