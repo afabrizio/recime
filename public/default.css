@@ -194,6 +194,8 @@ body {
 #dashboard-logo {
   height: 10vh;
   font-size: 5vmin;
+  text-align: center;
+  padding: 3vmin;
 }
 
 .sidebar-item {
@@ -212,12 +214,35 @@ body {
   position: relative;
   display: block;
   height: 30vh;
+  background-image: url('images/dashboard.png');
+  background-size: cover;
+}
+
+#dashboard-greeting {
+  display: block;
+  text-align: right;
+  padding-top: 2vmin;
+  padding-right: 4vmin;
+  font-size: 3vmin;
+  color: white;
 }
 
 #dashboard-modules-container {
   position: relative;
+  z-index: 3;
   display: block;
   height: 70vh;
+  background-image: url('images/modules-background.png');
+  background-size: cover;
+}
+
+#dashboard-modules-overlay {
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  display: block;
+  height: 70vh;
+  background-color: rgba(0,0,0,.9);
 }
 
 .module-row {
@@ -240,4 +265,5 @@ body {
   display: inline-block;
   height: 25vh;
   width: 20vw;
+  background-color: rgba(86,165,135,.2);
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import store from './../store.js';
 
 export default React.createClass({
   contextTypes: {
@@ -16,8 +17,13 @@ export default React.createClass({
           <div className="sidebar-item" className="dashboard-border">Dashboard</div>
         </div>
         <div id="dashboard-main" className="dashboard-border">
-          <div id="dashboard-image" className="dashboard-border">IMAGE</div>
+          <div id="dashboard-image" className="dashboard-border">
+            <div id="dashboard-greeting">
+              {`Welcome, ${store.getState().user}!`}
+            </div>
+          </div>
           <div id="dashboard-modules-container" className="dashboard-border">
+          <div id="dashboard-modules-overlay">
             <div className="module-row">
               <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
@@ -34,6 +40,7 @@ export default React.createClass({
               <div className="module-spacer"></div>
               <div className="module dashboard-border"></div>
             </div>
+          </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,8 @@ function registerRequest(db, req, res) {
     {username: req.body.username},
     (err, user) => {
       if(user) {
-        return res.send('The username already exists, please choose another.');
+        res.send('The username already exists, please choose another.');
+        return;
       } else {
         users.insertOne(
           {username: req.body.username, password: req.body.password},
