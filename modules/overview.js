@@ -9,7 +9,11 @@ const createPage_overview = React.createClass({
     return (
       <div id="overview-container">
         <div id="recipe-name">
-          <input type="text" placeholer="Recipe Name"/>
+          {'Recipe Name: '}
+          <input
+          type="text"
+          maxLength="36"
+          placeholer="type a brief name" />
         </div>
         <div id="recipe-image">
           <input type="file"/>

@@ -10,14 +10,23 @@ const createPage = React.createClass({
     return (
       <div id="create-container">
         <div id="create-sidebar">
-          <div id="create-logo" className="dashboard-border">
+          <div className="logo dashboard-border">
             Reci-me
           </div>
-          <div className="sidebar-item dashboard-border">Account</div>
-          <div className="sidebar-item dashboard-border">Dashboard</div>
+          <div className="sidebar-item">Account</div>
+          <div className="sidebar-item">Dashboard</div>
         </div>
         <div id="create-main">
           <div id="create-main-header">
+            <div className="greeting">
+              Create New Recipe
+            </div>
+            <div className="tools">
+              <span className="fa fa-caret-left"></span>
+              <span className="fa fa-caret-right"></span>
+              <span className="fa fa-pencil"></span>
+              <span className="fa fa-floppy-o"></span>
+            </div>
           </div>
           <div id="create-main-content">
             {this.props.children}
