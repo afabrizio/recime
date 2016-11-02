@@ -11,6 +11,7 @@ import Home from './modules/home.js';
 import Dashboard from './modules/dashboard.js';
 import Create from './modules/create.js';
 import Overview from './modules/overview.js';
+
 ReactDOM.render(
   (
     <Provider store={store}>
@@ -29,3 +30,5 @@ ReactDOM.render(
   ),
    document.getElementById('app-container')
  );
+
+ store.subscribe(()=>console.log(store.getState()));

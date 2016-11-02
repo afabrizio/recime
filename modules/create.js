@@ -6,6 +6,8 @@ import store from './../store.js';
 
 const createPage = React.createClass({
   render() {
+    var dispatch = this.props.dispatch;
+    var recipes = this.props.recipes;
     return (
       <div id="create-container">
         <div id="create-sidebar">
@@ -22,13 +24,17 @@ const createPage = React.createClass({
             </div>
             <div className="tools">
               <span className="fa fa-caret-left"></span>
-              <span className="fa fa-caret-right"></span>
-              <span className="fa fa-pencil"></span>
+              <span
+              className="fa fa-caret-right"
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'rgb(86,165,135)'}
+              onClick={(e) => {this.next(dispatch, recipes)}}>
+              </span>
               <span
               className="fa fa-floppy-o"
               onMouseEnter={(e) => e.target.style.color = 'white'}
               onMouseLeave={(e) => e.target.style.color = 'rgb(86,165,135)'}
-              onClick={(e) => {this.save()}}>
+              onClick={(e) => {this.save(dispatch, recipes)}}>
               </span>
             </div>
           </div>
@@ -40,8 +46,23 @@ const createPage = React.createClass({
     )
   },
 
-  save: function() {
+  idGenerator: function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  },
+
+  save: function(dispatch, recipes) {
+    let timeStamp = Date.now();
+    let id = this.idGenerator();
     let currentCreateState = document.getElementById('create-main-content').firstChild.id;
+    let creatingOrUpdating = 'creating';
+    if(store.getState().currentView === 'create-updateInstance') {
+      creatingOrUpdating = 'updating';
+      timeStamp = recipes[recipes.length-1].createdTimestamp;
+      id = recipes[recipes.length-1].recipeId;
+    }
 
     switch (currentCreateState) {
       case 'overview-container':
@@ -52,13 +73,12 @@ const createPage = React.createClass({
         let recipeImage = document.getElementById('the-recipe-image');
         let recipeDescription = document.getElementById('the-recipe-description');
 
-        if(recipeName.value === '') {
-          return;
-        } else {
-          this.props.recipes.push(
+        if(recipeName.value !== '') {
+          let newRecipeContent =
             {
+              recipeId: id,
               createdBy: this.props.user,
-              createdTimestamp: Date.now(),
+              createdTimestamp: timeStamp,
               createStage: 'overview',
               recipeName: recipeName.value,
               recipeType: recipeType.value,
@@ -67,12 +87,42 @@ const createPage = React.createClass({
               recipeImage: recipeImage.value,
               recipeDescription: recipeDescription.value
             }
+          dispatch(
+            {
+              type: 'SAVE_RECIPE_CONTENT',
+              payload: {
+                newRecipeContent: newRecipeContent,
+                saveType: creatingOrUpdating
+              }
+            }
           );
-          console.log(store.getState())
+          if(creatingOrUpdating === 'creating') {
+            dispatch(
+              {type: 'UPDATE_CURRENT_VIEW',
+              payload: 'create-updateInstance'}
+            );
+          }
+        } else {
+          window.alert('Recipe must have at least a name.');
+          return;
         }
         break;
 
       default:
+        return;
+    }
+  },
+
+  next: function(dispatch, recipes) {
+    let currentCreateState = document.getElementById('create-main-content').firstChild.id;
+    switch (currentCreateState) {
+      case 'overview-container':
+        this.save(dispatch, recipes);
+        browserHistory.push('/:user/create/overview');
+        break;
+
+      default:
+        return;
     }
   }
 })

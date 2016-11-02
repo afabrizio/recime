@@ -50,9 +50,8 @@ const dashboard =  React.createClass({
   },
 
   toCreateModule: function() {
-    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create-recipe'});
+    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create-newInstance'});
     browserHistory.push(`/${store.getState().user}/create`);
-    console.log(store.getState());
   }
 })
 

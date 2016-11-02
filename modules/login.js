@@ -79,7 +79,6 @@ function handleLogin() {
       if(typeof response === 'object') {
         store.dispatch({type: 'LOGIN_USER', payload: response.username});
         store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'dashboard'});
-        console.log(store.getState())
         browserHistory.push(`/${response.username}/dashboard`);
       } else {
         return;
