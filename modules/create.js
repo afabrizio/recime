@@ -6,6 +6,7 @@ import store from './../store.js';
 
 const createPage = React.createClass({
   render() {
+    var user = this.props.user;
     var dispatch = this.props.dispatch;
     var recipes = this.props.recipes;
     return (
@@ -28,13 +29,13 @@ const createPage = React.createClass({
               className="fa fa-caret-right"
               onMouseEnter={(e) => e.target.style.color = 'white'}
               onMouseLeave={(e) => e.target.style.color = 'rgb(86,165,135)'}
-              onClick={(e) => {this.next(dispatch, recipes)}}>
+              onClick={(e) => {this.next(dispatch, recipes, user)}}>
               </span>
               <span
               className="fa fa-floppy-o"
               onMouseEnter={(e) => e.target.style.color = 'white'}
               onMouseLeave={(e) => e.target.style.color = 'rgb(86,165,135)'}
-              onClick={(e) => {this.save(dispatch, recipes)}}>
+              onClick={(e) => {this.save(dispatch, recipes, user)}}>
               </span>
             </div>
           </div>
@@ -53,7 +54,7 @@ const createPage = React.createClass({
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   },
 
-  save: function(dispatch, recipes) {
+  save: function(dispatch, recipes, user) {
     let timeStamp = Date.now();
     let id = this.idGenerator();
     let currentCreateState = document.getElementById('create-main-content').firstChild.id;
@@ -74,6 +75,7 @@ const createPage = React.createClass({
         let recipeDescription = document.getElementById('the-recipe-description');
 
         if(recipeName.value !== '') {
+          //save and store content to the state:
           let newRecipeContent =
             {
               recipeId: id,
@@ -102,6 +104,25 @@ const createPage = React.createClass({
               payload: 'create-updateInstance'}
             );
           }
+          //Send saved content to the database:
+          var PORT = process.env.PORT || 8080;
+          let URI = '/users';
+          let requestProps =
+            {
+              method: 'PUT',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(
+                {
+                  username: user,
+                  saving: 'Recipe Content',
+                  recipeContent: newRecipeContent
+                }
+              )
+            }
+          let saveRecipeContent = new Request(URI, requestProps);
+          fetch(saveRecipeContent)
+            .then(response => response.json())
+            .then(response => console.log(response));
         } else {
           window.alert('Recipe must have at least a name.');
           return;
@@ -113,11 +134,11 @@ const createPage = React.createClass({
     }
   },
 
-  next: function(dispatch, recipes) {
+  next: function(dispatch, recipes, user) {
     let currentCreateState = document.getElementById('create-main-content').firstChild.id;
     switch (currentCreateState) {
       case 'overview-container':
-        this.save(dispatch, recipes);
+        this.save(dispatch, recipes, user);
         browserHistory.push('/:user/create/overview');
         break;
 

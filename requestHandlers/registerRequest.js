@@ -9,7 +9,11 @@ function registerRequest(db, req, res) {
         return;
       } else {
         users.insertOne(
-          {username: req.body.username, password: req.body.password},
+          {
+            username: req.body.username,
+            password: req.body.password,
+            recipes: []
+          },
           (err, insertDetails) => {
             users.findOne(
               {username: req.body.username, password: req.body.password},
