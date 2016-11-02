@@ -1,4 +1,9 @@
-const initialState = {currentView: null};
+const initialState =
+  {
+    currentView: null,
+    user: null,
+    recipes: []
+  };
 
 export default function(state=initialState, action) {
   switch (action.type) {

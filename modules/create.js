@@ -6,7 +6,6 @@ import store from './../store.js';
 
 const createPage = React.createClass({
   render() {
-    console.log(this.props)
     return (
       <div id="create-container">
         <div id="create-sidebar">
@@ -25,7 +24,12 @@ const createPage = React.createClass({
               <span className="fa fa-caret-left"></span>
               <span className="fa fa-caret-right"></span>
               <span className="fa fa-pencil"></span>
-              <span className="fa fa-floppy-o"></span>
+              <span
+              className="fa fa-floppy-o"
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'rgb(86,165,135)'}
+              onClick={(e) => {this.save()}}>
+              </span>
             </div>
           </div>
           <div id="create-main-content">
@@ -34,13 +38,50 @@ const createPage = React.createClass({
         </div>
       </div>
     )
+  },
+
+  save: function() {
+    let currentCreateState = document.getElementById('create-main-content').firstChild.id;
+
+    switch (currentCreateState) {
+      case 'overview-container':
+        let recipeName = document.getElementById('the-recipe-name');
+        let recipeType = document.getElementById('the-recipe-type');
+        let recipeTime = document.getElementById('the-recipe-time');
+        let recipeDifficulty = document.getElementById('the-recipe-difficulty');
+        let recipeImage = document.getElementById('the-recipe-image');
+        let recipeDescription = document.getElementById('the-recipe-description');
+
+        if(recipeName.value === '') {
+          return;
+        } else {
+          this.props.recipes.push(
+            {
+              createdBy: this.props.user,
+              createdTimestamp: Date.now(),
+              createStage: 'overview',
+              recipeName: recipeName.value,
+              recipeType: recipeType.value,
+              recimeTime: recipeTime.value,
+              recipeDifficulty: recipeDifficulty.value,
+              recipeImage: recipeImage.value,
+              recipeDescription: recipeDescription.value
+            }
+          );
+          console.log(store.getState())
+        }
+        break;
+
+      default:
+    }
   }
 })
 
 const mapStateToProps = (state) => {
   return (
     {
-      user: state.user
+      user: state.user,
+      recipes: state.recipes
     }
   )
 }

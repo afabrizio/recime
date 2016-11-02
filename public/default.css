@@ -1,5 +1,6 @@
 body {
   position: relative;
+  font-family: Khula;
 }
 
 #background-image {
@@ -172,15 +173,11 @@ body {
   background-color: rgba(36,36,36,1);
 }
 
-#dashboard-container div {
-  min-height: 5vh;
-  color: white;
-}
-
 .dashboard-border {
   border-style: solid;
   border-width: 1px;
-  border-color: white;
+  border-color: rgba(86,165,135,1);
+;
 }
 
 #dashboard-sidebar {
@@ -194,6 +191,7 @@ body {
 .sidebar-item {
   font-size: 2vmin;
   padding: 1vmin;
+  color: rgba(86,165,135,1);
 }
 
 #dashboard-logo {
@@ -201,13 +199,15 @@ body {
   font-size: 4vmin;
   text-align: center;
   padding: 1vmin;
+  color: rgba(86,165,135,1);
 }
 
 .sidebar-item {
   height: 5vh;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: lightgray;
+  border-bottom-color: rgba(86,165,135,1);
+  color: rgba(86,165,135,1);
 }
 
 #dashboard-main {
@@ -277,6 +277,7 @@ body {
   text-align: center;
   font-size: 6vmin;
   padding-top: 4vmin;
+  color: white;
 }
 
 .module-name {
@@ -290,10 +291,8 @@ body {
   padding: 1vmin;
 }
 
-
-#create-container div {
-  min-height: 25px;
-  color: white;
+#create-container {
+  background-color: rgb(36,36,36);
 }
 
 #create-sidebar {
@@ -302,8 +301,10 @@ body {
   vertical-align: top;
   width: 20vw;
   height: 100vh;
+  color: rgba(86,165,135,1);
+  background-color: black;
   border-style: solid;
-  border-color: white;
+  border-color: rgba(86,165,135,1);
   border-width: 2px;
 }
 
@@ -312,6 +313,8 @@ body {
   font-size: 4vmin;
   text-align: center;
   padding: 1vmin;
+  color: rgb(86,165,135);
+  background-color: black;
 }
 
 #create-main {
@@ -320,35 +323,41 @@ body {
   vertical-align: top;
   width: 80vw;
   height: 100vh;
-}
-
-#create-main-header {
-  text-align: right;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: lightgray;
-}
-
-#create-main-header > .greeting {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 3vmin;
+  color: white;
   padding-left: 3vmin;
   padding-right: 3vmin;
 }
 
+#create-main-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(86,165,135,1);
+}
+
+#create-main-header > .greeting {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 3.5vmin;
+  color: rgba(86,165,135,1);
+}
+
 #create-main-header > .tools {
   display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  width: 50%;
 }
 
 #create-main-header > .tools > span {
   vertical-align: middle;
   font-size: 4vmin;
-  padding: 2vmin;
+  margin: 2vmin;
+  color: rgba(86,165,135,1);
 }
 
 #recipe-name {
-  padding-left: 2vmin;
   font-size: 3vmin;
   padding-top: 3vmin;
   padding-bottom: 3vmin;
@@ -360,4 +369,61 @@ body {
   color: black;
   font-size: 3vmin;
   vertical-align: middle;
+  padding: 1vmin;
+}
+
+#recipe-image {
+  margin-top: 3vmin;
+  font-size: 2vmin;
+}
+
+#recipe-image > div {
+  width: 100%;
+  height: 25vh;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  background-color: rgba(255,255,255,.5);
+}
+
+#recipe-description {
+  margin-top: 3vmin;
+  font-size: 2vmin;
+}
+
+#recipe-description > input {
+  font-size: 2vmin;
+}
+
+#recipe-categories {
+  text-align: center;
+  margin-top: 3vmin;
+}
+
+#recipe-categories > div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 33%;
+  text-align: center;
+  font-size: 2.5vmin;
+}
+
+#recipe-categories > div > select {
+  font-size: 2vmin;
+  color: black;
+}
+
+#recipe-categories > div > input {
+  font-size: 2vmin;
+  color: black;
+  width: 20%;
+  text-align: right;
+}
+
+.overview-icon {
+  color: white;
+  font-size: 8vmin;
+  padding-bottom: 2vmin;
 }

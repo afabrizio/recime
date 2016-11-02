@@ -11,15 +11,52 @@ const createPage_overview = React.createClass({
         <div id="recipe-name">
           {'Recipe Name: '}
           <input
+          id="the-recipe-name"
           type="text"
           maxLength="36"
-          placeholer="type a brief name" />
+          placeholder="enter the recipe name" />
+        </div>
+        <div id="recipe-categories">
+          <div id="recipe-type">
+            <div className="fa fa-cutlery overview-icon"></div>
+            <div>Type</div>
+            <select id="the-recipe-type">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snack</option>
+              <option>Dessert</option>
+              <option>Beverage</option>
+            </select>
+          </div>
+          <div id="recipe-time">
+            <div className="fa fa-clock-o overview-icon"></div>
+            <div>Ready In</div>
+            <input type="number" max="999"/>
+            <select id="the-recipe-time">
+              <option>Minutes</option>
+              <option>Hours</option>
+              <option>Days</option>
+            </select>
+          </div>
+          <div id="recipe-difficulty">
+            <div className="fa fa-area-chart overview-icon"></div>
+            <div>Difficulty</div>
+            <select id="the-recipe-difficulty">
+              <option>Easy</option>
+              <option>Intermediate</option>
+              <option>Difficult</option>
+            </select>
+          </div>
         </div>
         <div id="recipe-image">
-          <input type="file"/>
+          {'Recipe Image: '}
+          <div></div>
+          <input id="the-recipe-image" type="file"/>
         </div>
-        <div id="recipe-descripton">
-          <textarea className="form-control" rows="3"></textarea>
+        <div id="recipe-description">
+          {'Description: '}
+          <textarea id="the-recipe-description" className="form-control" rows="4" maxLength="512"></textarea>
         </div>
       </div>
     )

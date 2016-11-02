@@ -15,8 +15,8 @@ const dashboard =  React.createClass({
           <div id="dashboard-logo" className="dashboard-border">
             Reci-me
           </div>
-          <div className="sidebar-item dashboard-border">Account</div>
-          <div className="sidebar-item dashboard-border">Dashboard</div>
+          <div className="sidebar-item">Account</div>
+          <div className="sidebar-item">Dashboard</div>
         </div>
         <div id="dashboard-main" className="dashboard-border">
           <div id="dashboard-image" className="dashboard-border">
