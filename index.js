@@ -11,6 +11,7 @@ import Home from './modules/home.js';
 import Dashboard from './modules/dashboard.js';
 import Create from './modules/create.js';
 import Overview from './modules/overview.js';
+import Ingredients from './modules/ingredients.js';
 
 ReactDOM.render(
   (
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route path='/:user/dashboard' component={Dashboard}/>
           <Route path='/:user/create' component={Create}>
             <IndexRoute component={Overview}/>
+            <Route path='/:user/create/ingredients' component={Ingredients}/>
           </Route>
         </Route>
       </Router>

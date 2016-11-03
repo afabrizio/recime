@@ -74,7 +74,7 @@ const createPage = React.createClass({
     let id = this.idGenerator();
     let currentCreateState = document.getElementById('create-main-content').firstChild.id;
     let creatingOrUpdating = 'creating';
-    if(store.getState().currentView === 'create-updateInstance') {
+    if(store.getState().currentView === 'create : overview : updateInstance') {
       creatingOrUpdating = 'updating';
       timeStamp = recipes[recipes.length-1].createdTimestamp;
       id = recipes[recipes.length-1].recipeId;
@@ -116,7 +116,7 @@ const createPage = React.createClass({
           if(creatingOrUpdating === 'creating') {
             dispatch(
               {type: 'UPDATE_CURRENT_VIEW',
-              payload: 'create-updateInstance'}
+              payload: 'create : overview : updateInstance'}
             );
           }
           //Send saved content to the database:
@@ -154,7 +154,8 @@ const createPage = React.createClass({
     switch (currentCreateState) {
       case 'overview-container':
         this.save(dispatch, recipes, user);
-        browserHistory.push('/:user/create/overview');
+        browserHistory.push('/:user/create/ingredients');
+        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : ingredients : updateInstance'})
         break;
 
       default:

@@ -30,6 +30,22 @@ export default function(state=initialState, action) {
       }
       state = Object.assign({}, state, {recipes: theUserRecipes});
       break;
+
+    case 'ADD_NEW_INGREDIENT':
+      let recipes = state.recipes.concat();
+      recipes.forEach( (recipe) => {
+        if(recipe.recipeId === action.payload.updateRecipe) {
+          if(recipe.ingredients) {
+            recipe.ingredients.push(action.payload);
+          } else {
+            recipe.ingredients = [];
+            recipe.ingredients.push(action.payload);
+          }
+        }
+      })
+      state = Object.assign({}, state, {recipes: recipes});
+      break;
+
     default:
       state = Object.assign({}, state);
   }

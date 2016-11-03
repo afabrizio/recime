@@ -65,7 +65,7 @@ const dashboard =  React.createClass({
   },
 
   toCreateModule: function() {
-    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create-newInstance'});
+    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : overview : newInstance'});
     browserHistory.push(`/${store.getState().user}/create`);
   }
 })

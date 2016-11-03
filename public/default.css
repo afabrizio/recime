@@ -409,3 +409,47 @@ body {
   font-size: 8vmin;
   padding-bottom: 2vmin;
 }
+
+#ingredients-container > div > div {
+  font-size: 3vmin;
+  margin-top: 3vmin;
+  margin-bottom: 1vmin;
+}
+
+#qty {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5%;
+  font-size: 2vmin;
+  line-height: 3vmin;
+  height: 3vmin;
+  width: 8%;
+  color: black;
+}
+
+#qty-unit {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5%;
+  line-height: 3vmin;
+}
+
+.ingredient-description {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+  height: 3vmin;
+  line-height: 3vmin;
+  font-size: 2vmin;
+  padding-top: 2px;
+  padding-left: 1vmin;
+  color: black;
+}
+
+.add-item-btn {
+  vertical-align: middle;
+  font-size: 2vmin;
+  color: black;
+  height: 3vmin;
+  line-height: 3vmin;
+}
