@@ -9,17 +9,32 @@ const dashboard =  React.createClass({
   },
 
   render() {
+    var dispatch = this.props.dispatch;
     return (
       <div id="dashboard-container">
-        <div id="dashboard-sidebar" className="dashboard-border">
-          <div id="dashboard-logo" className="dashboard-border">
+        <div id="sidebar">
+          <div className="sidebar-logo sidebar-border">
             Reci-me
           </div>
-          <div className="sidebar-item">Account</div>
-          <div className="sidebar-item">Dashboard</div>
+          <div
+          className="sidebar-item"
+          onMouseEnter={(e) => {e.target.style.backgroundColor='rgb(36,36,36)'}}
+          onMouseLeave={(e) => {e.target.style.backgroundColor='black'}}>
+            Account
+          </div>
+          <div
+          className="sidebar-item"
+          onMouseEnter={(e) => {e.target.style.backgroundColor='rgb(36,36,36)'}}
+          onMouseLeave={(e) => {e.target.style.backgroundColor='black'}}
+          onClick={() => {
+            browserHistory.push(`/${store.getState().user}/dashboard`);
+            dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'dashboard'});
+          }}>
+            Dashboard
+          </div>
         </div>
-        <div id="dashboard-main" className="dashboard-border">
-          <div id="dashboard-image" className="dashboard-border">
+        <div id="dashboard-main">
+          <div id="dashboard-image">
             <div id="dashboard-greeting">
               {`Welcome, ${store.getState().user}!`}
             </div>
