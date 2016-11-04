@@ -85,6 +85,7 @@ const createPage = React.createClass({
         let recipeName = document.getElementById('the-recipe-name');
         let recipeType = document.getElementById('the-recipe-type');
         let recipeTime = document.getElementById('the-recipe-time');
+        let recipeTimeUnits = document.getElementById('recipe-time-units');
         let recipeDifficulty = document.getElementById('the-recipe-difficulty');
         let recipeImage = document.getElementById('the-recipe-image');
         let recipeDescription = document.getElementById('the-recipe-description');
@@ -99,7 +100,7 @@ const createPage = React.createClass({
               createStage: 'overview',
               recipeName: recipeName.value,
               recipeType: recipeType.value,
-              recimeTime: recipeTime.value,
+              recimeTime: recipeTime.value + recipeTimeUnits.value,
               recipeDifficulty: recipeDifficulty.value,
               recipeImage: recipeImage.value,
               recipeDescription: recipeDescription.value
@@ -129,7 +130,7 @@ const createPage = React.createClass({
               body: JSON.stringify(
                 {
                   username: user,
-                  saving: 'Recipe Content',
+                  saving: 'Recipe Content : overview',
                   recipeContent: newRecipeContent
                 }
               )
@@ -144,6 +145,28 @@ const createPage = React.createClass({
         }
         break;
 
+      case 'ingredients-container':
+        //Send saved content to the database:
+        var PORT = process.env.PORT || 8080;
+        let URI = '/users';
+        let requestProps =
+          {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(
+              {
+                username: user,
+                saving: 'Recipe Content : ingredients',
+                recipeContent: store.getState().recipes[recipes.length-1].ingredients
+              }
+            )
+          }
+        let saveRecipeContent = new Request(URI, requestProps);
+        fetch(saveRecipeContent)
+          .then(response => response.json())
+            .then(response => console.log(response));
+        break;
+
       default:
         return;
     }
@@ -155,9 +178,13 @@ const createPage = React.createClass({
       case 'overview-container':
         this.save(dispatch, recipes, user);
         browserHistory.push('/:user/create/ingredients');
-        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : ingredients : updateInstance'})
+        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : ingredients : updateInstance'});
         break;
 
+      case 'ingredients-container':
+        this.save(dispatch, recipes, user);
+        browserHistory.push('/:user/create/steps');
+        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : steps : updateInstance'})
       default:
         return;
     }

@@ -423,18 +423,30 @@ body {
   font-size: 2vmin;
   line-height: 3vmin;
   height: 3vmin;
-  width: 8%;
-  color: black;
+  width: 7%;
+  background-color: transparent;
+  border-radius: 1vmin;
+  border-width: 1px;
+  padding-left: 1vmin;
+  padding-top: .5vmin;
 }
 
 #qty-unit {
   display: inline-block;
   vertical-align: middle;
   margin-right: 5%;
-  line-height: 3vmin;
+  line-height: 2vmin;
+  font-size: 2vmin;
+  background-color: transparent;
+  border-radius: 1vmin;
+  padding-left: 1vmin;
 }
 
-.ingredient-description {
+#qty-unit > option {
+  background-color: rgb(36,36,36);
+}
+
+#new-ingredient {
   display: inline-block;
   vertical-align: middle;
   width: 50%;
@@ -443,13 +455,27 @@ body {
   font-size: 2vmin;
   padding-top: 2px;
   padding-left: 1vmin;
-  color: black;
+  padding-top: .5vmin;
+  margin-right: 2vmin;
+  background-color: transparent;
+  border-radius: 1vmin;
+  border-width: 1px;
 }
 
 .add-item-btn {
   vertical-align: middle;
   font-size: 2vmin;
-  color: black;
   height: 3vmin;
   line-height: 3vmin;
+  border-radius: 1vmin;
+  background-color: transparent;
+}
+
+.delete {
+  font-size: 2vmin;
+  margin-right: 2vmin;
+}
+
+.ingredient {
+  font-size: 2vmin;
 }

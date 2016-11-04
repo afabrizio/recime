@@ -32,8 +32,8 @@ const createPage_overview = React.createClass({
           <div id="recipe-time">
             <div className="fa fa-clock-o overview-icon"></div>
             <div>Ready In</div>
-            <input type="number" min="0" max="999"/>
-            <select id="the-recipe-time">
+            <input id="the-recipe-time" type="number" min="0" max="999"/>
+            <select id="recipe-time-units">
               <option>Minutes</option>
               <option>Hours</option>
               <option>Days</option>
