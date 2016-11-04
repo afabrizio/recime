@@ -423,7 +423,7 @@ body {
   font-size: 2vmin;
   line-height: 3vmin;
   height: 3vmin;
-  width: 7%;
+  width: auto;
   background-color: transparent;
   border-radius: 1vmin;
   border-width: 1px;

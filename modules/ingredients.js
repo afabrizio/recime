@@ -61,6 +61,32 @@ const createPage_needed = React.createClass({
       e.target.style.color = 'white';
     })
     deleteOption.addEventListener('click', (e) => {
+      //delete the ingredient from the state object:
+      let updateId = recipes.concat()[recipes.length-1].recipeId;
+      let deleteIngredientAt = null;
+      let updatedIngredients = [];
+      Array.from(theAddedIngredients.children).forEach( (ingredientDiv, index) => {
+        if(ingredientDiv.firstChild === e.target) {
+          deleteIngredientAt = index;
+        }
+      });
+      let updatedRecipes = recipes.concat().forEach(recipe => {
+        if(recipe.recipeId === updateId) {
+          recipe.ingredients.splice(deleteIngredientAt, 1);
+          updatedIngredients = recipe.ingredients;
+        }
+      });
+      dispatch(
+        {
+          type:'DELETE_INGREDIENT',
+          payload:
+            {
+              recipeId: updateId,
+              updatedIngredients: updatedIngredients
+            }
+        }
+      );
+      //remove the ingredient from the view:
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     })
     theNewIngredient.className = 'ingredient';
@@ -69,9 +95,6 @@ const createPage_needed = React.createClass({
     ingredientContainer.appendChild(theNewIngredient);
     theAddedIngredients.appendChild(ingredientContainer);
 
-    theQty.value = '';
-    theQtyUnit.value = '';
-    newIngredient.value = '';
     dispatch(
       {
         type: 'ADD_NEW_INGREDIENT',
@@ -84,6 +107,9 @@ const createPage_needed = React.createClass({
           }
       }
     );
+    theQty.value = '';
+    theQtyUnit.value = '';
+    newIngredient.value = '';
     return;
   }
 });

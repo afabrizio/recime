@@ -40,14 +40,15 @@ function saveRecipeRequest(db, req, res) {
           break;
 
         case 'Recipe Content : ingredients':
-          user.recipes.forEach( (recipe, index) => {
-            if(req.body.recipeContent[0].updateRecipe
-            && recipe.recipeId === req.body.recipeContent[0].updateRecipe) {
-              updatingRecipeIndex = index;
-              return;
+          let updatedRecipes = user.recipes.concat();
+          updatedRecipes[user.recipes.length-1].ingredients = req.body.recipeContent;
+          users.updateOne(
+            {_id: userId},
+            {
+              $set: {recipes: updatedRecipes}
             }
-          });
-          res.json({});
+          )
+          res.json(user.recipes[user.recipes.length-1]);
           break;
 
         default:

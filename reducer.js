@@ -32,8 +32,8 @@ export default function(state=initialState, action) {
       break;
 
     case 'ADD_NEW_INGREDIENT':
-      let recipes = state.recipes.concat();
-      recipes.forEach( (recipe) => {
+      let recipesCopy1 = state.recipes.concat();
+      recipesCopy1.forEach( (recipe) => {
         if(recipe.recipeId === action.payload.updateRecipe) {
           if(recipe.ingredients) {
             recipe.ingredients.push(action.payload);
@@ -43,7 +43,17 @@ export default function(state=initialState, action) {
           }
         }
       })
-      state = Object.assign({}, state, {recipes: recipes});
+      state = Object.assign({}, state, {recipes: recipesCopy1});
+      break;
+
+    case 'DELETE_INGREDIENT':
+      let recipesCopy2 = state.recipes.concat();
+      recipesCopy2.forEach( (recipe) => {
+        if(action.payload.recipeId === recipe.id) {
+          recipe.ingredients = action.payload.updatedIngredients;
+        }
+      });
+      state = Object.assign({}, state, {recipes: recipesCopy2});
       break;
 
     default:
