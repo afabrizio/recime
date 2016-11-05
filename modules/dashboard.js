@@ -45,17 +45,21 @@ const dashboard =  React.createClass({
               <div
               id="dashboard-create"
               className="module dashboard-border"
+              onMouseEnter={ (e) => {
+                let selectedModule = document.getElementById('dashboard-create');
+                selectedModule.style.borderStyle = 'solid';
+                selectedModule.style.borderColor='white';
+              } }
+              onMouseLeave={ (e) => {
+                let selectedModule = document.getElementById('dashboard-create');
+                selectedModule.style.borderStyle = 'none';
+              } }
               onClick={ () => {this.toCreateModule()} }>
                 <div className="fa fa-pencil-square-o"></div>
                 <div className="module-name">
                   Create Recipe
                 </div>
               </div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
             </div>
           </div>
           </div>

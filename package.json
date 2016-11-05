@@ -6,7 +6,8 @@
   "devtool": "source-map",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:dev": "webpack-dev-server --inline --content-base public --history-api-fallback",
+    "start:dev": "webpack && node server.js",
+    "start:devServer": "webpack-dev-server --inline --content-base public --history-api-fallback",
     "start:prod": "webpack && node server.js",
     "build": "webpack",
     "serve": "webpack-dev-server"
