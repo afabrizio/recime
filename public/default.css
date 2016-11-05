@@ -1,5 +1,6 @@
 body {
   position: relative;
+  font-family: Khula;
 }
 
 #background-image {
@@ -172,39 +173,42 @@ body {
   background-color: rgba(36,36,36,1);
 }
 
-#dashboard-container div {
-  min-height: 5vh;
-  color: white;
-}
-
-.dashboard-border {
-  border-style: solid;
-  border-width: 1px;
-  border-color: white;
-}
-
-#dashboard-sidebar {
-  position: relative;
+#sidebar {
   display: inline-block;
+  position: relative;
+  vertical-align: top;
   width: 20vw;
   height: 100vh;
-  vertical-align: top;
+  color: rgba(86,165,135,1);
+  background-color: black;
+  border-style: solid;
+  border-color: rgba(86,165,135,1);
+  border-width: 2px;
 }
 
-.sidebar-item {
-  font-size: 2vmin;
-  padding: 1vmin;
-}
-
-#dashboard-logo {
-  height: 10vh;
-  font-size: 4vmin;
-  text-align: center;
-  padding: 1vmin;
+.sidebar-border {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(86,165,135,1);
 }
 
 .sidebar-item {
   height: 5vh;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(86,165,135,1);
+  font-size: 2vmin;
+  padding: 1vmin;
+  color: rgba(86,165,135,1);
+}
+
+.sidebar-logo {
+  height: 10vh;
+  font-size: 4vmin;
+  text-align: center;
+  padding: 1vmin;
+  color: rgb(86,165,135);
+  background-color: black;
 }
 
 #dashboard-main {
@@ -221,6 +225,9 @@ body {
   height: 30vh;
   background-image: url('images/dashboard.png');
   background-size: cover;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
 }
 
 #dashboard-greeting {
@@ -274,6 +281,7 @@ body {
   text-align: center;
   font-size: 6vmin;
   padding-top: 4vmin;
+  color: white;
 }
 
 .module-name {
@@ -285,4 +293,189 @@ body {
   font-size: 2vmin;
   text-align: center;
   padding: 1vmin;
+}
+
+#create-container {
+  background-color: rgb(36,36,36);
+}
+
+#create-main {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  width: 80vw;
+  height: 100vh;
+  color: white;
+  padding-left: 3vmin;
+  padding-right: 3vmin;
+}
+
+#create-main-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(86,165,135,1);
+}
+
+#create-main-header > .greeting {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 3.5vmin;
+  color: rgba(86,165,135,1);
+}
+
+#create-main-header > .tools {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  width: 50%;
+}
+
+#create-main-header > .tools > span {
+  vertical-align: middle;
+  font-size: 4vmin;
+  margin: 2vmin;
+  color: rgba(86,165,135,1);
+}
+
+#recipe-name {
+  font-size: 3vmin;
+  padding-top: 3vmin;
+  padding-bottom: 3vmin;
+  vertical-align: middle;
+}
+
+#recipe-name > input {
+  width: 70%;
+  color: black;
+  font-size: 3vmin;
+  vertical-align: middle;
+  padding: 1vmin;
+}
+
+#recipe-image {
+  margin-top: 3vmin;
+  font-size: 2vmin;
+}
+
+#recipe-image > div {
+  width: 100%;
+  height: 25vh;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  background-color: rgba(255,255,255,.5);
+}
+
+#recipe-description {
+  margin-top: 3vmin;
+  font-size: 2vmin;
+}
+
+#recipe-description > input {
+  font-size: 2vmin;
+}
+
+#recipe-categories {
+  text-align: center;
+  margin-top: 3vmin;
+}
+
+#recipe-categories > div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 33%;
+  text-align: center;
+  font-size: 2.5vmin;
+}
+
+#recipe-categories > div > select {
+  font-size: 2vmin;
+  color: black;
+}
+
+#recipe-categories > div > input {
+  font-size: 2vmin;
+  color: black;
+  width: 20%;
+  text-align: right;
+}
+
+.overview-icon {
+  color: white;
+  font-size: 8vmin;
+  padding-bottom: 2vmin;
+}
+
+#ingredients-container > div > div {
+  font-size: 3vmin;
+  margin-top: 3vmin;
+  margin-bottom: 1vmin;
+}
+
+#qty {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5%;
+  font-size: 2vmin;
+  line-height: 3vmin;
+  height: 3vmin;
+  width: auto;
+  background-color: transparent;
+  border-radius: 1vmin;
+  border-width: 1px;
+  padding-left: 1vmin;
+  padding-top: .5vmin;
+}
+
+#qty-unit {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5%;
+  line-height: 2vmin;
+  font-size: 2vmin;
+  background-color: transparent;
+  border-radius: 1vmin;
+  padding-left: 1vmin;
+}
+
+#qty-unit > option {
+  background-color: rgb(36,36,36);
+}
+
+#new-ingredient {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+  height: 3vmin;
+  line-height: 3vmin;
+  font-size: 2vmin;
+  padding-top: 2px;
+  padding-left: 1vmin;
+  padding-top: .5vmin;
+  margin-right: 2vmin;
+  background-color: transparent;
+  border-radius: 1vmin;
+  border-width: 1px;
+}
+
+.add-item-btn {
+  vertical-align: middle;
+  font-size: 2vmin;
+  height: 3vmin;
+  line-height: 3vmin;
+  border-radius: 1vmin;
+  background-color: transparent;
+}
+
+.delete {
+  font-size: 2vmin;
+  margin-right: 2vmin;
+}
+
+.ingredient {
+  font-size: 2vmin;
 }

@@ -1,23 +1,40 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import store from './../store.js';
 
-export default React.createClass({
+const dashboard =  React.createClass({
   contextTypes: {
     router: React.PropTypes.object
   },
 
   render() {
+    var dispatch = this.props.dispatch;
     return (
       <div id="dashboard-container">
-        <div id="dashboard-sidebar" className="dashboard-border">
-          <div id="dashboard-logo" className="dashboard-border">
+        <div id="sidebar">
+          <div className="sidebar-logo sidebar-border">
             Reci-me
           </div>
-          <div className="sidebar-item dashboard-border">Account</div>
-          <div className="sidebar-item dashboard-border">Dashboard</div>
+          <div
+          className="sidebar-item"
+          onMouseEnter={(e) => {e.target.style.backgroundColor='rgb(36,36,36)'}}
+          onMouseLeave={(e) => {e.target.style.backgroundColor='black'}}>
+            Account
+          </div>
+          <div
+          className="sidebar-item"
+          onMouseEnter={(e) => {e.target.style.backgroundColor='rgb(36,36,36)'}}
+          onMouseLeave={(e) => {e.target.style.backgroundColor='black'}}
+          onClick={() => {
+            browserHistory.push(`/${store.getState().user}/dashboard`);
+            dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'dashboard'});
+          }}>
+            Dashboard
+          </div>
         </div>
-        <div id="dashboard-main" className="dashboard-border">
-          <div id="dashboard-image" className="dashboard-border">
+        <div id="dashboard-main">
+          <div id="dashboard-image">
             <div id="dashboard-greeting">
               {`Welcome, ${store.getState().user}!`}
             </div>
@@ -28,22 +45,41 @@ export default React.createClass({
               <div
               id="dashboard-create"
               className="module dashboard-border"
-              onClick={() => }>
+              onMouseEnter={ (e) => {
+                let selectedModule = document.getElementById('dashboard-create');
+                selectedModule.style.borderStyle = 'solid';
+                selectedModule.style.borderColor='white';
+              } }
+              onMouseLeave={ (e) => {
+                let selectedModule = document.getElementById('dashboard-create');
+                selectedModule.style.borderStyle = 'none';
+              } }
+              onClick={ () => {this.toCreateModule()} }>
                 <div className="fa fa-pencil-square-o"></div>
                 <div className="module-name">
                   Create Recipe
                 </div>
               </div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
-              <div className="module dashboard-border"></div>
             </div>
           </div>
           </div>
         </div>
       </div>
     )
+  },
+
+  toCreateModule: function() {
+    store.dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : overview : newInstance'});
+    browserHistory.push(`/${store.getState().user}/create`);
   }
 })
+
+const mapStateToProps = (state) => {
+  return (
+    {
+      user: state.user
+    }
+  )
+}
+
+export default connect(mapStateToProps)(dashboard);

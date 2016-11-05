@@ -2,6 +2,7 @@ const router = require('express').Router();
 const path = require('path');
 const loginRequest = require('./requestHandlers/loginRequest.js');
 const registerRequest = require('./requestHandlers/registerRequest.js');
+const saveRecipeRequest = require('./requestHandlers/saveRecipeRequest.js');
 
 module.exports = function routes(db) {
 
@@ -17,9 +18,11 @@ module.exports = function routes(db) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 
-  router.post( '/users', function(req, res) {loginRequest(db, req, res)} );
+  router.post('/users', function(req, res) {loginRequest(db, req, res)} );
 
   router.post('/register', function(req, res) {registerRequest(db, req, res)} );
+
+  router.put('/users', function(req, res) {saveRecipeRequest(db, req, res)} );
 
   return router;
 }

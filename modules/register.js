@@ -78,7 +78,7 @@ function handleRegister() {
   }
 
   var PORT = process.env.PORT || 8080;
-  let URI = `http://localhost:${PORT}/register`;
+  let URI = 'register';
   let requestProps =
     {
       method: 'POST',
