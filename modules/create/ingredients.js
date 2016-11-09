@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import store from './../store.js';
+import store from './../../store.js';
 
 const createPage_needed = React.createClass({
   render() {
     var dispatch = this.props.dispatch;
-    var recipes = this.props.recipes;
+    var currentRecipe = this.props.currentRecipe;
+    var ingredients = this.props.ingredients;
 
     return (
       <div id="ingredients-container">
@@ -28,7 +29,7 @@ const createPage_needed = React.createClass({
               </select>
               <input id="new-ingredient" className="ingredient-description" type="text" placeholder="ingredient" maxLength="32"/>
               <button
-              onClick={() => this.addIngredient(dispatch, recipes)}
+              onClick={() => this.addIngredient(dispatch, currentRecipe)}
               className="add-item-btn"
               type="button">
                 Add
@@ -40,7 +41,8 @@ const createPage_needed = React.createClass({
     )
   },
 
-  addIngredient: function(dispatch, recipes) {
+  addIngredient: function(dispatch, currentRecipe) {
+    // get user inputs:
     let theQty = document.getElementById('qty');
     let theQtyUnit = document.getElementById('qty-unit');
     let newIngredient = document.getElementById('new-ingredient');
@@ -62,30 +64,13 @@ const createPage_needed = React.createClass({
     })
     deleteOption.addEventListener('click', (e) => {
       //delete the ingredient from the state object:
-      let updateId = recipes.concat()[recipes.length-1].recipeId;
-      let deleteIngredientAt = null;
-      let updatedIngredients = [];
+      var updatedIngredients = store.getState().ingredients.concat();
       Array.from(theAddedIngredients.children).forEach( (ingredientDiv, index) => {
         if(ingredientDiv.firstChild === e.target) {
-          deleteIngredientAt = index;
+          updatedIngredients.splice(index, 1);
         }
       });
-      let updatedRecipes = recipes.concat().forEach(recipe => {
-        if(recipe.recipeId === updateId) {
-          recipe.ingredients.splice(deleteIngredientAt, 1);
-          updatedIngredients = recipe.ingredients;
-        }
-      });
-      dispatch(
-        {
-          type:'DELETE_INGREDIENT',
-          payload:
-            {
-              recipeId: updateId,
-              updatedIngredients: updatedIngredients
-            }
-        }
-      );
+      dispatch({type:'DELETE_INGREDIENT', payload: updatedIngredients});
       //remove the ingredient from the view:
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     })
@@ -100,7 +85,7 @@ const createPage_needed = React.createClass({
         type: 'ADD_NEW_INGREDIENT',
         payload:
           {
-            updateRecipe: recipes[recipes.length-1].recipeId,
+            currentRecipe: currentRecipe,
             newIngredient: newIngredient.value,
             qtyUnit: theQtyUnit.value,
             qty: theQty.value
@@ -118,7 +103,8 @@ const mapStateToProps = (state) => {
   return (
     {
       user: state.user,
-      recipes: state.recipes
+      currentRecipe: state.currentRecipe,
+      ingredients: state.ingredients
     }
   )
 }

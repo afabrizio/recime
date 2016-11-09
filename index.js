@@ -9,9 +9,10 @@ import Login from './modules/login.js';
 import Register from './modules/register.js';
 import Home from './modules/home.js';
 import Dashboard from './modules/dashboard.js';
-import Create from './modules/create.js';
-import Overview from './modules/overview.js';
-import Ingredients from './modules/ingredients.js';
+import Create from './modules/create/create.js';
+import Overview from './modules/create/overview.js';
+import Ingredients from './modules/create/ingredients.js';
+import Steps from './modules/create/steps.js';
 
 ReactDOM.render(
   (
@@ -25,6 +26,7 @@ ReactDOM.render(
           <Route path='/:user/create' component={Create}>
             <IndexRoute component={Overview}/>
             <Route path='/:user/create/ingredients' component={Ingredients}/>
+            <Route path='/:user/create/steps' component={Steps}/>
           </Route>
         </Route>
       </Router>

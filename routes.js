@@ -3,6 +3,7 @@ const path = require('path');
 const loginRequest = require('./requestHandlers/loginRequest.js');
 const registerRequest = require('./requestHandlers/registerRequest.js');
 const saveRecipeRequest = require('./requestHandlers/saveRecipeRequest.js');
+const recipeDataRequest = require('./requestHandlers/recipeDataRequest.js');
 
 module.exports = function routes(db) {
 
@@ -17,6 +18,8 @@ module.exports = function routes(db) {
   router.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
+
+  router.post('/:user/recipes', function(req, res) {recipeDataRequest(db, req, res)} );
 
   router.post('/users', function(req, res) {loginRequest(db, req, res)} );
 

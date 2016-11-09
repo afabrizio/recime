@@ -41,14 +41,21 @@ function saveRecipeRequest(db, req, res) {
 
         case 'Recipe Content : ingredients':
           let updatedRecipes = user.recipes.concat();
-          updatedRecipes[user.recipes.length-1].ingredients = req.body.recipeContent;
+          let updatedRecipe = {};
+          user.recipes.forEach( (recipe, index) => {
+            if(recipe.recipeId === req.body.currentRecipe) {
+              updatedRecipes[index].createStage = 'ingredients';
+              updatedRecipes[index].ingredients = req.body.recipeContent;
+              updatedRecipe = updatedRecipes[index];
+            }
+          })
           users.updateOne(
             {_id: userId},
             {
               $set: {recipes: updatedRecipes}
             }
           )
-          res.json(user.recipes[user.recipes.length-1]);
+          res.json(updatedRecipe);
           break;
 
         default:

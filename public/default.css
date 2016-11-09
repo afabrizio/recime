@@ -325,14 +325,14 @@ body {
   color: rgba(86,165,135,1);
 }
 
-#create-main-header > .tools {
+#create-main-header > #tools {
   display: inline-block;
   vertical-align: middle;
   text-align: right;
   width: 50%;
 }
 
-#create-main-header > .tools > span {
+#create-main-header > #tools > span {
   vertical-align: middle;
   font-size: 4vmin;
   margin: 2vmin;
@@ -478,4 +478,61 @@ body {
 
 .ingredient {
   font-size: 2vmin;
+}
+
+.steps-container{
+  width: 90%;
+}
+
+.steps-header {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 3vmin;
+  font-size: 3vmin;
+}
+
+.step-checklist {
+  display: block;
+  width: 100%
+  margin-top: 3vmin;
+}
+
+.step-checklist > input {
+  width: 75%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 1vmin;
+  background-color: transparent;
+  font-size: 2vmin;
+  padding-left: 1vmin;
+  padding-top: .5vmin;
+  margin-right: 5%;
+}
+
+.step-checklist > button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 1vmin;
+  background-color: transparent;
+  font-size: 2vmin;
+}
+
+#todos > div {
+  font-size: 2vmin;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 2.5vmin;
+  height: 2.5vmin;
+  vertical-align: middle;
+}
+
+.todo {
+  vertical-align: middle;
+  padding-left: 2vmin;
+  padding-right: 2vmin;
 }

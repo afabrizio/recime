@@ -2,7 +2,7 @@ const initialState =
   {
     currentView: null,
     user: null,
-    recipes: []
+    currentRecipe: null
   };
 
 export default function(state=initialState, action) {
@@ -12,48 +12,32 @@ export default function(state=initialState, action) {
       break;
 
     case 'UPDATE_CURRENT_VIEW':
-      state = Object.assign({}, state, {currentView: action.payload});
+      switch (action.payload) {
+        case 'create : ingredients : newInstance':
+          state = Object.assign({}, {user: state.user, currentView: action.payload, currentRecipe: state.currentRecipe, ingredients: []});
+          break;
+
+        case 'create : steps : newInstance':
+          state = Object.assign({}, {user: state.user, currentView: action.payload, currentRecipe: state.currentRecipe, steps: []});
+          break;
+
+        default:
+          state = Object.assign({}, state, {currentView: action.payload});
+      }
       break;
 
-    case 'SAVE_RECIPE_CONTENT':
-      let theUserRecipes = state.recipes.concat();
-      let creatingOrUpdating = action.payload.saveType;
-      let newRecipeContent = action.payload.newRecipeContent;
-      switch (creatingOrUpdating) {
-        case 'creating':
-          theUserRecipes.push(newRecipeContent);
-          break;
-        case 'updating':
-          theUserRecipes.splice(theUserRecipes.length-1, 1, newRecipeContent);
-          break;
-        default:
-      }
-      state = Object.assign({}, state, {recipes: theUserRecipes});
+    case 'UPDATE_CURRENT_RECIPE':
+      state = Object.assign({}, state, {currentRecipe: action.payload});
       break;
 
     case 'ADD_NEW_INGREDIENT':
-      let recipesCopy1 = state.recipes.concat();
-      recipesCopy1.forEach( (recipe) => {
-        if(recipe.recipeId === action.payload.updateRecipe) {
-          if(recipe.ingredients) {
-            recipe.ingredients.push(action.payload);
-          } else {
-            recipe.ingredients = [];
-            recipe.ingredients.push(action.payload);
-          }
-        }
-      })
-      state = Object.assign({}, state, {recipes: recipesCopy1});
+      let updatedIngredients = state.ingredients.concat();
+      updatedIngredients.push(action.payload);
+      state = Object.assign({}, state, {ingredients: updatedIngredients});
       break;
 
     case 'DELETE_INGREDIENT':
-      let recipesCopy2 = state.recipes.concat();
-      recipesCopy2.forEach( (recipe) => {
-        if(action.payload.recipeId === recipe.id) {
-          recipe.ingredients = action.payload.updatedIngredients;
-        }
-      });
-      state = Object.assign({}, state, {recipes: recipesCopy2});
+      state = Object.assign({}, state, {ingredients: action.payload});
       break;
 
     default:
