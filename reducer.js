@@ -18,7 +18,7 @@ export default function(state=initialState, action) {
           break;
 
         case 'create : steps : newInstance':
-          state = Object.assign({}, {user: state.user, currentView: action.payload, currentRecipe: state.currentRecipe, steps: []});
+          state = Object.assign({}, {user: state.user, currentView: action.payload, currentRecipe: state.currentRecipe, steps: [{}] });
           break;
 
         default:
@@ -38,6 +38,31 @@ export default function(state=initialState, action) {
 
     case 'DELETE_INGREDIENT':
       state = Object.assign({}, state, {ingredients: action.payload});
+      break;
+
+    case 'ADD_TODO':
+      let updatedSteps = state.steps.concat();
+      console.log(updatedSteps)
+      if(updatedSteps[0] === {}) {
+        console.log('setting first case') //somehow has property with image: null??
+        updatedSteps[0] = {step: 1};
+        updatedSteps[0].image = action.payload.image;
+        updatedSteps[0].todos = [];
+        updatedSteps[0].todos.push(action.payload.todo);
+      } else {
+        if(!updatedSteps[action.payload.step-1]) {
+          updatedSteps.push({step: acion.payload.step})
+        }
+        updatedSteps[action.payload.step-1].image = action.payload.image;
+        updatedSteps[action.payload.step-1].todos.push(action.payload.todo);
+      }
+      state = Object.assign({}, state, {steps: updatedSteps});
+      break;
+
+    case 'DELETE_TODO':
+      let modifiedSteps = state.steps.concat();
+      modifiedSteps[action.payload.step-1].todos.splice(action.payload.todoIndex, 1);
+      state = Object.assign({}, state, {steps: modifiedSteps});
       break;
 
     default:

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import store from './../../store.js';
 
 const createPage_steps = React.createClass({
   render() {
@@ -20,7 +21,7 @@ const createPage_steps = React.createClass({
     return (
       <div id="steps-container">
         <div className="steps-header">
-          {`Step ${steps.length+1} of ${steps.length+1}`}
+          {`Step ${steps.length} of ${steps.length}`}
         </div>
         <div className="step-image">
         </div>
@@ -34,6 +35,7 @@ const createPage_steps = React.createClass({
   },
 
   addTodo: function(e) {
+    let steps = store.getState().steps;
     let newTodo = document.createElement('div');
     let checkBox = document.createElement('input');
     let todo = document.createElement('span');
@@ -54,6 +56,7 @@ const createPage_steps = React.createClass({
       Array.from(document.getElementById('todos').children).forEach( (todoDiv, index) => {
         if(todoDiv.lastChild === e.target) {
           todoDiv.parentNode.removeChild(todoDiv);
+          store.dispatch({type: 'DELETE_TODO', payload: {step: store.getState().steps.length, image: null, todoIndex: index}});
         }
       });
     });
@@ -63,6 +66,7 @@ const createPage_steps = React.createClass({
     newTodo.appendChild(deleteOption);
     document.getElementById('todos').appendChild(newTodo);
     e.target.parentNode.firstChild.value = '';
+    store.dispatch( {type: 'ADD_TODO', payload: {step: steps.length, image: null, todo: todo.textContent}} );
   }
 });
 
