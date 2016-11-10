@@ -7,16 +7,6 @@ const createPage_steps = React.createClass({
   render() {
     var dispatch = this.props.dispatch;
     var steps = this.props.steps;
-    const tools = document.getElementById('tools');
-
-    if(!tools.lastChild.classList.contains('finish')) {
-      let finishTool = document.createElement('span');
-      finishTool.className = 'fa fa-flag-checkered finish';
-      finishTool.addEventListener('mouseenter', e => e.target.style.color = 'white');
-      finishTool.addEventListener('mouseleave', e => e.target.style.color = 'rgb(86,165,135)');
-      finishTool.addEventListener('click', e => {});
-      tools.appendChild(finishTool);
-    }
 
     return (
       <div id="steps-container">
@@ -68,6 +58,7 @@ const createPage_steps = React.createClass({
     e.target.parentNode.firstChild.value = '';
     store.dispatch( {type: 'ADD_TODO', payload: {step: steps.length, image: null, todo: todo.textContent}} );
   }
+
 });
 
 const mapStateToProps = (state) => {

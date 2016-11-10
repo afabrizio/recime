@@ -4,12 +4,27 @@ import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 import store from './../../store.js';
 
+var isComplete = false;
+
 const createPage = React.createClass({
   render() {
     var user = this.props.user;
     var dispatch = this.props.dispatch;
     var currentView = this.props.currentView;
     var currentRecipe = this.props.currentRecipe;
+
+    //conditionally display the complete tool:
+    if(currentView === 'create : steps') {
+      const tools = document.getElementById('tools');
+      if(!tools.lastChild.classList.contains('finish')) {
+        let finishTool = document.createElement('span');
+        finishTool.className = 'fa fa-flag-checkered finish';
+        finishTool.addEventListener('mouseenter', e => e.target.style.color = 'white');
+        finishTool.addEventListener('mouseleave', e => e.target.style.color = 'rgb(86,165,135)');
+        finishTool.addEventListener('click', e => {this.completeRecipe(dispatch, user, currentView, currentRecipe)});
+        tools.appendChild(finishTool);
+      }
+    }
 
     return (
       <div id="create-container">
@@ -73,6 +88,16 @@ const createPage = React.createClass({
   save: function(dispatch, user, currentView, currentRecipe) {
     let timeStamp = Date.now();
     let currentCreateState = document.getElementById('create-main-content').firstChild.id;
+    //create arguments to use later for the Request:
+    const PORT = process.env.PORT || 8080;
+    const URI = '/users';
+    let synchronous = true;
+    let requestProps =
+      {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({})
+      }
 
     switch (currentCreateState) {
       case 'overview-container':
@@ -84,12 +109,13 @@ const createPage = React.createClass({
         let recipeDifficulty = document.getElementById('the-recipe-difficulty');
         let recipeImage = document.getElementById('the-recipe-image');
         let recipeDescription = document.getElementById('the-recipe-description');
+        var newRecipeContent = {};
 
         switch (currentView) {
           case 'create : overview : newInstance':
             if(recipeName.value !== '') {
               //save and store content to the state:
-              let newRecipeContent =
+              newRecipeContent =
                 {
                   recipeId: this.idGenerator(),
                   createdBy: this.props.user,
@@ -104,25 +130,12 @@ const createPage = React.createClass({
                 }
               dispatch({type: 'UPDATE_CURRENT_RECIPE', payload: newRecipeContent.recipeId});
               dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : overview : updateInstance'});
-              //Send saved content to the database:
-              var PORT = process.env.PORT || 8080;
-              let URI = '/users';
-              let requestProps =
-                {
-                  method: 'PUT',
-                  headers: {'Content-Type': 'application/json'},
-                  body: JSON.stringify(
-                    {
-                      username: user,
-                      saving: 'Recipe Content : overview',
-                      recipeContent: newRecipeContent
-                    }
-                  )
-                }
-              let saveRecipeContent = new Request(URI, requestProps);
-              fetch(saveRecipeContent)
-                .then(response => response.json())
-                .then(response => console.log(response));
+              //assemble request body:
+              requestProps.body = JSON.stringify({
+                username: user,
+                saving: 'recipe-content : overview',
+                recipeContent: newRecipeContent
+              })
             } else {
               window.alert('Recipe must have at least a name.');
               return;
@@ -131,10 +144,11 @@ const createPage = React.createClass({
 
           case 'create : overview : updateInstance':
             if(recipeName.value !== '') {
+              synchronous = false;
               //retrieve recipe data from the database:
               this.getRecipeData(user, currentRecipe)
                 .then( recipe => {
-                  let newRecipeContent =
+                  newRecipeContent =
                     {
                       recipeId: recipe.recipeId,
                       createdBy: this.props.user,
@@ -146,26 +160,17 @@ const createPage = React.createClass({
                       recipeDifficulty: recipeDifficulty.value,
                       recipeImage: recipeImage.value,
                       recipeDescription: recipeDescription.value
-                    }
-                    //Send saved content to the database:
-                    var PORT = process.env.PORT || 8080;
-                    let URI = '/users';
-                    let requestProps =
-                      {
-                        method: 'PUT',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(
-                          {
-                            username: user,
-                            saving: 'Recipe Content : overview',
-                            recipeContent: newRecipeContent
-                          }
-                        )
-                      }
-                    let saveRecipeContent = new Request(URI, requestProps);
-                    fetch(saveRecipeContent)
+                    };
+                    //assemble request body:
+                    requestProps.body = JSON.stringify({
+                      username: user,
+                      saving: 'recipe-content : overview',
+                      recipeContent: newRecipeContent
+                    });
+                    //update the database:
+                    fetch( new Request(URI, requestProps) )
                       .then(response => response.json())
-                      .then(response => console.log(response));
+                        .then(response => {})
                 });
             } else {
               window.alert('Recipe must have at least a name.');
@@ -179,30 +184,35 @@ const createPage = React.createClass({
         break;
 
       case 'ingredients-container':
-        //Send saved content to the database:
-        var PORT = process.env.PORT || 8080;
-        let URI = '/users';
-        let requestProps =
-          {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(
-              {
-                username: user,
-                saving: 'Recipe Content : ingredients',
-                currentRecipe: currentRecipe,
-                recipeContent: store.getState().ingredients
-              }
-            )
-          }
-        let saveRecipeContent = new Request(URI, requestProps);
-        fetch(saveRecipeContent)
-          .then(response => response.json())
-            .then(response => console.log(response));
+        requestProps.body = JSON.stringify({
+          username: user,
+          saving: 'recipe-content : ingredients',
+          currentRecipe: currentRecipe,
+          recipeContent: store.getState().ingredients
+        })
+        break;
+
+      case 'steps-container':
+        var finalSave = null;
+        if(isComplete) {
+          finalSave = 'recipe-content : completed';
+        }
+        requestProps.body = JSON.stringify({
+          username: user,
+          saving: finalSave || 'recipe-content : steps',
+          currentRecipe: currentRecipe,
+          recipeContent: store.getState().steps
+        })
         break;
 
       default:
-        return;
+        break;
+    }
+    //update the database:
+    if(synchronous) {
+      fetch(new Request(URI, requestProps))
+        .then(response => response.json())
+          .then(response => {})
     }
   },
 
@@ -214,14 +224,24 @@ const createPage = React.createClass({
           return;
         }
         this.save(dispatch, user, currentView, currentRecipe);
-        browserHistory.push('/:user/create/ingredients');
+        browserHistory.push(`/${user}/create/ingredients`);
         dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : ingredients : newInstance'});
         break;
 
       case 'ingredients-container':
         this.save(dispatch, user, currentView, currentRecipe);
-        browserHistory.push('/:user/create/steps');
-        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : steps : newInstance'})
+        browserHistory.push(`/${user}/create/steps`);
+        dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'create : steps'});
+        break;
+
+      case 'steps-container':
+        this.save(dispatch, user, currentView, currentRecipe);
+        dispatch({type: 'ADD_STEP'});
+        const todos = document.getElementById('todos');
+        while(todos.firstChild) {
+          todos.removeChild(todos.firstChild);
+        }
+        break;
       default:
         return;
     }
@@ -247,6 +267,13 @@ const createPage = React.createClass({
         .then(response => response.json())
         .then(response => {resolve(response)});
     })
+  },
+
+  completeRecipe: function(dispatch, user, currentView, currentRecipe) {
+    isComplete = true;
+    this.save(dispatch, user, currentView, currentRecipe);
+    browserHistory.push(`/${user}/dashboard`);
+    dispatch({type: 'UPDATE_CURRENT_VIEW', payload: 'dashboard'});
   }
 
 })

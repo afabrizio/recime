@@ -1,66 +1,77 @@
 module.exports =
 function saveRecipeRequest(db, req, res) {
   const users = db.collection('users');
-  let userId = null;
-  let updatingRecipeIndex = null;
   users.findOne(
     {username: req.body.username},
     (err, user) => {
+
       if(err) {
         process.exit(1);
       }
-      userId = user._id;
+
+      var userId = user._id;
+      var updatedRecipes = user.recipes.concat();
+      var responseToClient = {};
+
       switch (req.body.saving) {
-        case 'Recipe Content : overview':
-          user.recipes.forEach( (recipe, index) => {
+        case 'recipe-content : overview':
+          let found = false;
+          updatedRecipes.forEach( (recipe, index) => {
             if(recipe.recipeId === req.body.recipeContent.recipeId) {
-              updatingRecipeIndex = index;
-              return;
+              found = true;
+              updatedRecipes[index] = req.body.recipeContent;
             }
           });
-          let newRecipes = user.recipes.concat();
-          if(updatingRecipeIndex !== null) {
-            newRecipes.splice(updatingRecipeIndex, 1, req.body.recipeContent);
-            users.updateOne(
-              {_id: userId},
-              {
-                $set: {recipes: newRecipes}
-              }
-            );
-          } else {
-            newRecipes.push(req.body.recipeContent);
-            users.updateOne(
-              {_id: userId},
-              {
-                $set: {recipes: newRecipes}
-              }
-            );
+          if(found === false) {
+            updatedRecipes.push(req.body.recipeContent);
+            responseToClient = updatedRecipes[updatedRecipes.length-1];
           }
-          res.json(newRecipes[updatingRecipeIndex || 0]);
           break;
 
-        case 'Recipe Content : ingredients':
-          let updatedRecipes = user.recipes.concat();
-          let updatedRecipe = {};
-          user.recipes.forEach( (recipe, index) => {
+        case 'recipe-content : ingredients':
+          updatedRecipes.forEach( recipe => {
             if(recipe.recipeId === req.body.currentRecipe) {
-              updatedRecipes[index].createStage = 'ingredients';
-              updatedRecipes[index].ingredients = req.body.recipeContent;
-              updatedRecipe = updatedRecipes[index];
+              recipe.createStage = 'ingredients';
+              recipe.ingredients = req.body.recipeContent;
+              responseToClient = recipe;
             }
           })
-          users.updateOne(
-            {_id: userId},
-            {
-              $set: {recipes: updatedRecipes}
+          break;
+
+        case 'recipe-content : steps':
+          updatedRecipes.forEach( recipe => {
+            if(recipe.recipeId === req.body.currentRecipe) {
+              recipe.steps = req.body.recipeContent;
+              recipe.createStage = 'steps'
+              responseToClient = recipe;
             }
-          )
-          res.json(updatedRecipe);
+          })
+          break;
+
+        case 'recipe-content : completed':
+          updatedRecipes.forEach( recipe => {
+            if(recipe.recipeId === req.body.currentRecipe) {
+              recipe.steps = req.body.recipeContent;
+              recipe.createStage = 'completed'
+              responseToClient = recipe;
+            }
+          })
           break;
 
         default:
 
       }
+
+      //update the database:
+      users.updateOne(
+        {_id: userId},
+        {
+          $set: {recipes: updatedRecipes}
+        }
+      )
+
+      //respond to the client:
+      res.json(responseToClient);
     }
   )
 }
